@@ -1,6 +1,5 @@
 import subprocess
 import json
-import os
 from pathlib import Path
 
 
@@ -14,10 +13,33 @@ def collect_coverage(repo_path: str) -> dict:
     if not repo_path.exists():
         raise CoverageError(f"Repo path does not exist: {repo_path}")
 
-    # Run coverage using pytest
+    repo_name = repo_path.name
+
+    # Assume venvs are stored at ../venvs/<repo_name> relative to tool
+    venv_python = (
+        repo_path.parents[1]
+        / "venvs"
+        / repo_name
+        / "bin"
+        / "python"
+    )
+
+    if not venv_python.exists():
+        raise CoverageError(
+            f"Python venv not found for repo '{repo_name}' at {venv_python}"
+        )
+
+    # Run coverage using the repo's Python environment
     try:
         subprocess.run(
-            ["coverage", "run", "-m", "pytest"],
+            [
+                str(venv_python),
+                "-m",
+                "coverage",
+                "run",
+                "-m",
+                "pytest",
+            ],
             cwd=repo_path,
             check=True,
             stdout=subprocess.PIPE,
@@ -31,7 +53,14 @@ def collect_coverage(repo_path: str) -> dict:
     # Generate JSON report
     try:
         subprocess.run(
-            ["coverage", "json", "-o", "coverage.json"],
+            [
+                str(venv_python),
+                "-m",
+                "coverage",
+                "json",
+                "-o",
+                "coverage.json",
+            ],
             cwd=repo_path,
             check=True,
             stdout=subprocess.PIPE,
@@ -48,6 +77,4 @@ def collect_coverage(repo_path: str) -> dict:
         raise CoverageError("coverage.json not generated")
 
     with open(coverage_file, "r") as f:
-        coverage_data = json.load(f)
-
-    return coverage_data
+        return json.load(f)
