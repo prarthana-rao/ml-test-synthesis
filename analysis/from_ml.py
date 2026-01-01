@@ -102,3 +102,17 @@ def run_pipeline_from_ml(repo_base_path: str, ml_output_csv: str, top_k: int = 3
         print(f"\n✅ Final results written to: {output_path}")
 
     return results
+
+if __name__ == "__main__":
+    from config.paths import TARGET_REPOS_DIR, PROCESSED_DATA_DIR
+
+    ML_OUTPUT_CSV = PROCESSED_DATA_DIR / "ml_smell_predictions.csv"
+
+    print("\n📊 Starting post-ML analysis pipeline...")
+
+    run_pipeline_from_ml(
+        repo_base_path=str(TARGET_REPOS_DIR),
+        ml_output_csv=str(ML_OUTPUT_CSV),
+        top_k=30
+    )
+    print("\n✅ Post-ML analysis pipeline completed.")

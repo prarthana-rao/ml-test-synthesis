@@ -5,14 +5,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, classification_report
+from config.paths import MODELS_DIR, TRAINING_DATA_DIR
 import warnings
 
 warnings.filterwarnings('ignore')
 
 # --- 1. Config ---
-train_file = 'final_train_dataset.csv'
-model_filename = '../models/smell_detector.pkl'
-scaler_filename = '../models/scaler.pkl'
+train_file = TRAINING_DATA_DIR / "long_method_training_dataset.csv"
+model_filename = MODELS_DIR / "smell_detector.pkl"
+scaler_filename = MODELS_DIR / "scaler.pkl"
 necessary_features = ['scloc', 'lloc', 'effort', 'time', 'bugs', 'volume', 'difficulty', 'calculated_length']
 target_column = 'is_Long_Method'
 

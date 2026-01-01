@@ -1,12 +1,13 @@
 import pandas as pd
 import joblib
 import numpy as np
+from config.paths import MODELS_DIR, VALIDATION_DATA_DIR, PROCESSED_DATA_DIR
 
 # --- 1. Config ---
-unseen_file = '../data/validation/final_test_dataset.csv'
-model_filename = '../models/smell_detector.pkl'
-scaler_filename = '../models/scaler.pkl'
-output_file = '../data/processed/ml_smell_predictions.csv' # Renamed for clarity
+unseen_file = VALIDATION_DATA_DIR / "long_method_validation_dataset.csv"
+model_filename = MODELS_DIR / "smell_detector.pkl"
+scaler_filename = MODELS_DIR / "scaler.pkl"
+output_file = PROCESSED_DATA_DIR / "ml_smell_predictions.csv" # Renamed for clarity
 
 necessary_features = ['scloc', 'lloc', 'effort', 'time', 'bugs', 'volume', 'difficulty', 'calculated_length']
 

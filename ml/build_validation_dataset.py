@@ -12,11 +12,10 @@ from radon.complexity import cc_visit
 from radon.raw import analyze as raw_analyze
 from radon.metrics import h_visit
 from pathlib import Path
+from config.paths import TARGET_REPOS_DIR, VALIDATION_DATA_DIR
 
 # ---------- CONFIG ----------
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PROJECTS_ROOT_DIR = PROJECT_ROOT / "workspace" / "target-repos"
-OUTPUT_CSV_FILE = PROJECT_ROOT / "data" / "validation" / "methods_metrics_validation.csv"
+OUTPUT_CSV_FILE = VALIDATION_DATA_DIR / "method_metrics_dataset.csv"
 
 EVALUATION_REPOS = {"attrs", "jinja2", "itsdangerous"}
 
@@ -202,7 +201,7 @@ def process_file(file_path, counters=None):
 
 # ---------- Build dataset ----------
 
-def build_dataset(projects_root=PROJECTS_ROOT_DIR, output_csv=OUTPUT_CSV_FILE):
+def build_dataset(projects_root=TARGET_REPOS_DIR, output_csv=OUTPUT_CSV_FILE):
     all_rows = []
     counters = Counter()
 
