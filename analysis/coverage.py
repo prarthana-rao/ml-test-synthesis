@@ -1,6 +1,7 @@
 import subprocess
 import json
 from pathlib import Path
+import sys
 
 
 class CoverageError(Exception):
@@ -15,13 +16,16 @@ def collect_coverage(repo_path: str) -> dict:
 
     repo_name = repo_path.name
 
-    # Assume venvs are stored at ../venvs/<repo_name> relative to tool
+    # Resolve repo-specific venv (workspace/venvs/<repo>)
+    bin_dir = "Scripts" if sys.platform == "win32" else "bin"
+    exe_name = "python.exe" if sys.platform == "win32" else "python"
+
     venv_python = (
         repo_path.parents[1]
         / "venvs"
         / repo_name
-        / "bin"
-        / "python"
+        / bin_dir
+        / exe_name
     )
 
     if not venv_python.exists():
@@ -29,7 +33,7 @@ def collect_coverage(repo_path: str) -> dict:
             f"Python venv not found for repo '{repo_name}' at {venv_python}"
         )
 
-    # Run coverage using the repo's Python environment
+    # Run tests under coverage
     try:
         subprocess.run(
             [
