@@ -24,3 +24,18 @@ TRAINING_DATA_DIR = DATA_DIR / "train"
 VALIDATION_DATA_DIR = DATA_DIR / "validation"
 PROCESSED_DATA_DIR = DATA_DIR / "processed"
 MODELS_DIR = PROJECT_ROOT / "models"
+
+# Repos for dataset
+TRAINING_REPOS = {
+    "requests",
+    "flask",
+    "click",
+    "numpy",
+    "django",
+}
+
+VALIDATION_REPOS = {
+    "attrs",
+    "jinja2",
+    "itsdangerous",
+}

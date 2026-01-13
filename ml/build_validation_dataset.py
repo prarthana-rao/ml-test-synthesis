@@ -8,6 +8,7 @@ import csv
 import ast
 from collections import Counter
 
+from config.paths import VALIDATION_REPOS
 from radon.complexity import cc_visit
 from radon.raw import analyze as raw_analyze
 from radon.metrics import h_visit
@@ -17,7 +18,7 @@ from config.paths import TARGET_REPOS_DIR, VALIDATION_DATA_DIR
 # ---------- CONFIG ----------
 OUTPUT_CSV_FILE = VALIDATION_DATA_DIR / "long_method_validation_dataset.csv"
 
-EVALUATION_REPOS = {"attrs", "jinja2", "itsdangerous"}
+VALIDATION_REPOS = {"attrs", "jinja2", "itsdangerous"}
 
 FIELDNAMES = [
     'File_Path', 'Method_Name', 'start_line', 'end_line',
@@ -215,7 +216,7 @@ def build_dataset(projects_root=TARGET_REPOS_DIR, output_csv=OUTPUT_CSV_FILE):
             continue
 
         repo_name = repo_path.name
-        if repo_name not in EVALUATION_REPOS:
+        if repo_name not in VALIDATION_REPOS:
             continue
 
         print(f"Processing evaluation repo: {repo_name}")

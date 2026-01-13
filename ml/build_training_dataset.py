@@ -7,6 +7,8 @@ import csv
 import ast
 import random
 from collections import Counter
+from config.paths import TRAINING_REPOS
+
 
 from radon.complexity import cc_visit
 from radon.raw import analyze as raw_analyze
@@ -18,7 +20,7 @@ from config.paths import TARGET_REPOS_DIR, TRAINING_DATA_DIR
 OUTPUT_CSV_FILE = TRAINING_DATA_DIR / "long_method_training_dataset.csv"
 
 # ---------- TRAINING REPOS ----------
-TRAINING_REPOS = {"requests", "flask", "click"}
+# TRAINING_REPOS = {"requests", "flask", "click"}
 
 
 LLOC_THRESHOLD = 30
