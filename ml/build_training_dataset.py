@@ -7,14 +7,12 @@ import csv
 import ast
 import random
 from collections import Counter
-from config.paths import TRAINING_REPOS
-
 
 from radon.complexity import cc_visit
 from radon.raw import analyze as raw_analyze
 from radon.metrics import h_visit
 from pathlib import Path
-from config.paths import TARGET_REPOS_DIR, TRAINING_DATA_DIR
+from config.paths import TARGET_REPOS_DIR, TRAINING_DATA_DIR, TRAINING_REPOS
 
 # ---------- CONFIG ----------
 OUTPUT_CSV_FILE = TRAINING_DATA_DIR / "long_method_training_dataset.csv"

@@ -2,6 +2,7 @@
 import json
 import pandas as pd
 from pathlib import Path
+import os
 
 from analysis.risk import classify_risk
 from recommendations.rules import recommend_tests
@@ -13,11 +14,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 PROCESSED_DIR = DATA_DIR / "processed"
 
-INPUT_CSV = PROCESSED_DIR / "ml_smell_predictions.csv"
-OUTPUT_FULL = PROCESSED_DIR / "final_results.csv"
-OUTPUT_TOPK = PROCESSED_DIR / "final_results_topk.csv"
+CI_MODE = os.getenv("CI_MODE") == "1"
+CI_WORKSPACE = Path(os.getenv("CI_WORKSPACE", PROCESSED_DIR))
+
+if CI_MODE:
+    INPUT_CSV = CI_WORKSPACE / "processed" / "ml_smell_predictions.csv"
+    OUTPUT_FULL = CI_WORKSPACE / "processed" / "final_results.csv"
+    OUTPUT_TOPK = CI_WORKSPACE / "processed" / "final_results_topk.csv"
+else:
+    INPUT_CSV = PROCESSED_DIR / "ml_smell_predictions.csv"
+    OUTPUT_FULL = PROCESSED_DIR / "final_results.csv"
+    OUTPUT_TOPK = PROCESSED_DIR / "final_results_topk.csv"
 
 TOP_K = 30
+
 
 # ---------------------------------------------------------
 # Helpers
@@ -32,17 +42,22 @@ def extract_repo_and_file(file_path: str):
     idx = parts.index("target-repos")
     repo = parts[idx + 1]
     relative = Path(*parts[idx + 2:])
-
     return repo, str(relative)
 
 
 def load_coverage(repo_name: str) -> dict:
-    coverage_file = DATA_DIR / f"{repo_name}_coverage.json"
-    if not coverage_file.exists():
-        return {}
-
-    with open(coverage_file) as f:
-        return json.load(f).get("files", {})
+    if CI_MODE:
+        cov_file = CI_WORKSPACE / "coverage" / "coverage.json"
+        if not cov_file.exists():
+            return {}
+        with open(cov_file) as f:
+            return json.load(f).get("files", {})
+    else:
+        coverage_file = DATA_DIR / f"{repo_name}_coverage.json"
+        if not coverage_file.exists():
+            return {}
+        with open(coverage_file) as f:
+            return json.load(f).get("files", {})
 
 
 def compute_function_coverage(row, coverage_files) -> float:
@@ -56,17 +71,13 @@ def compute_function_coverage(row, coverage_files) -> float:
     total_lines = end - start + 1
     executed = set()
 
-    # ✅ KEEP THIS LOGIC — THIS IS WHY IT WORKS
     for covered_file, data in coverage_files.items():
         if covered_file.endswith(file_path):
             executed_lines = set(data.get("executed_lines", []))
             executed = executed_lines.intersection(range(start, end + 1))
             break
 
-    if total_lines == 0:
-        return 0.0
-
-    return round((len(executed) / total_lines) * 100, 2)
+    return round((len(executed) / total_lines) * 100, 2) if total_lines else 0.0
 
 
 def coverage_bucket(p: float) -> str:
@@ -78,6 +89,7 @@ def coverage_bucket(p: float) -> str:
         return "MEDIUM"
     return "HIGH"
 
+
 # ---------------------------------------------------------
 # Main
 # ---------------------------------------------------------
@@ -87,35 +99,35 @@ def main():
 
     df = pd.read_csv(INPUT_CSV)
 
-    # ---------------- Schema normalization ----------------
+    # ---------------- Normalize schema ----------------
     if "CC" in df.columns and "cc" not in df.columns:
         df = df.rename(columns={"CC": "cc"})
-
     if "File_Path" in df.columns:
         df = df.rename(columns={"File_Path": "file_path"})
-
     if "Method_Name" in df.columns:
         df = df.rename(columns={"Method_Name": "method_name"})
 
-    # ---------------- Repo + relative path ----------------
-    extracted = df["file_path"].apply(extract_repo_and_file)
-    df["repo_name"] = extracted.apply(lambda x: x[0])
-    df["file_path"] = extracted.apply(lambda x: x[1])
+    # ---------------- Repo handling ----------------
+    if CI_MODE:
+        repo_name = Path(os.getenv("TARGET_REPO")).name
+        df["repo_name"] = repo_name
+    else:
+        extracted = df["file_path"].apply(extract_repo_and_file)
+        df["repo_name"] = extracted.apply(lambda x: x[0])
+        df["file_path"] = extracted.apply(lambda x: x[1])
 
-    # ---------------- Load coverage once per repo ----------------
+    # ---------------- Coverage ----------------
     coverage_cache = {
         repo: load_coverage(repo)
         for repo in df["repo_name"].unique()
     }
 
-    # ---------------- Function-level coverage ----------------
     df["coverage_percent"] = df.apply(
         lambda r: compute_function_coverage(
             r, coverage_cache.get(r["repo_name"], {})
         ),
         axis=1,
     )
-
     df["coverage_bucket"] = df["coverage_percent"].apply(coverage_bucket)
 
     # ---------------- Risk ----------------
@@ -125,8 +137,8 @@ def main():
     )
 
     # ---------------- Recommendations ----------------
-    def build_recs(r):
-        return "; ".join(
+    df["recommendations"] = df.apply(
+        lambda r: "; ".join(
             recommend_tests(
                 {
                     "risk_category": r["risk_category"],
@@ -136,47 +148,21 @@ def main():
                     "difficulty": r.get("difficulty", 0),
                 }
             )
-        )
+        ),
+        axis=1,
+    )
 
-    df["recommendations"] = df.apply(build_recs, axis=1)
-
-    # ---------------- Final schema ----------------
-    final_cols = [
-        "repo_name",
-        "file_path",
-        "method_name",
-        "start_line",
-        "end_line",
-        "cc",
-        "lloc",
-        "difficulty",
-        "smell_label",
-        "coverage_percent",
-        "coverage_bucket",
-        "risk_category",
-        "recommendations",
-    ]
-
-    df = df[[c for c in final_cols if c in df.columns]]
-
-    PROCESSED_DIR.mkdir(exist_ok=True)
+    # ---------------- Final Output ----------------
+    OUTPUT_FULL.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(OUTPUT_FULL, index=False)
     print(f"[OK] Full results written to {OUTPUT_FULL}")
 
-    # ---------------- TOP-K Hidden Risk ----------------
     df_hr = df[df["smell_label"] == "HIGH"]
-
     if df_hr.empty:
-        print("[WARN] No Hidden Risk functions found")
+        print("[WARN] No HIGH risk functions found")
         return
 
-    sort_cols = ["lloc"]
-    if "ml_confidence" in df.columns:
-        sort_cols.insert(0, "ml_confidence")
-
-    df_hr = df_hr.sort_values(by=sort_cols, ascending=False)
-    df_topk = df_hr.groupby("repo_name").head(TOP_K)
-
+    df_topk = df_hr.sort_values(by="lloc", ascending=False).head(TOP_K)
     df_topk.to_csv(OUTPUT_TOPK, index=False)
     print(f"[OK] TOP-{TOP_K} results written to {OUTPUT_TOPK}")
 

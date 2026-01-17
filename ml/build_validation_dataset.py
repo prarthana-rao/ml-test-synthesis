@@ -8,17 +8,21 @@ import csv
 import ast
 from collections import Counter
 
-from config.paths import VALIDATION_REPOS
 from radon.complexity import cc_visit
 from radon.raw import analyze as raw_analyze
 from radon.metrics import h_visit
 from pathlib import Path
-from config.paths import TARGET_REPOS_DIR, VALIDATION_DATA_DIR
+from config.paths import TARGET_REPOS_DIR, VALIDATION_DATA_DIR, VALIDATION_REPOS
+
+CI_MODE = os.getenv("CI_MODE") == "1"
+CI_WORKSPACE = Path(os.getenv("CI_WORKSPACE", VALIDATION_DATA_DIR))
+TARGET_REPO = Path(os.getenv("TARGET_REPO", TARGET_REPOS_DIR))
+
 
 # ---------- CONFIG ----------
 OUTPUT_CSV_FILE = VALIDATION_DATA_DIR / "long_method_validation_dataset.csv"
+OUTPUT_CSV_FILE = (CI_WORKSPACE / "metrics" / "long_method_validation_dataset.csv") if CI_MODE else OUTPUT_CSV_FILE
 
-VALIDATION_REPOS = {"attrs", "jinja2", "itsdangerous"}
 
 FIELDNAMES = [
     'File_Path', 'Method_Name', 'start_line', 'end_line',
@@ -207,37 +211,35 @@ def process_file(file_path, counters=None):
 
 # ---------- Build dataset ----------
 
-def build_dataset(projects_root=TARGET_REPOS_DIR, output_csv=OUTPUT_CSV_FILE):
+def build_dataset(projects_root=TARGET_REPO, output_csv=OUTPUT_CSV_FILE):
     all_rows = []
     counters = Counter()
 
-    for repo_path in projects_root.iterdir():
-        if not repo_path.is_dir():
-            continue
+    if CI_MODE:
+        print(f"🔍 CI Mode: scanning repo {projects_root}")
 
-        repo_name = repo_path.name
-        if repo_name not in VALIDATION_REPOS:
-            continue
+        repo_paths = [projects_root]  # Treat as single repo
+    else:
+        repo_paths = [
+            p for p in projects_root.iterdir()
+            if p.is_dir() and p.name in VALIDATION_REPOS
+        ]
 
-        print(f"Processing evaluation repo: {repo_name}")
+    for repo_path in repo_paths:
+        print(f"Processing repo: {repo_path.name}")
 
         for root, dirs, files in os.walk(repo_path):
-            # Prune directory search
-            dirs[:] = [d for d in dirs if not d.startswith('.') and not "test" in d.lower()]
-            
-            if is_test_path(root): # Skip if the whole directory is a test dir
+            dirs[:] = [d for d in dirs if not d.startswith('.') and "test" not in d.lower()]
+
+            if is_test_path(root):
                 continue
 
             for file in files:
-                if file.endswith('.py'):
-                    # NEW: Also check the individual filename
-                    if is_test_path(root, file):
-                        continue
-                        
+                if file.endswith(".py") and not is_test_path(root, file):
                     file_path = os.path.join(root, file)
-                    # ... process file ...
                     rows = process_file(file_path, counters=counters)
                     all_rows.extend(rows)
+
 
     print(f"Total methods collected: {len(all_rows)}")
 

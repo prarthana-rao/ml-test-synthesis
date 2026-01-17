@@ -2,12 +2,22 @@ import pandas as pd
 import joblib
 import numpy as np
 from config.paths import MODELS_DIR, VALIDATION_DATA_DIR, PROCESSED_DATA_DIR
+from pathlib import Path
+
+import os
+CI_MODE = os.getenv("CI_MODE") == "1"
+CI_WORKSPACE = Path(os.getenv("CI_WORKSPACE", PROCESSED_DATA_DIR))
+
 
 # --- 1. Config ---
 unseen_file = VALIDATION_DATA_DIR / "long_method_validation_dataset.csv"
 model_filename = MODELS_DIR / "smell_detector.pkl"
 scaler_filename = MODELS_DIR / "scaler.pkl"
 output_file = PROCESSED_DATA_DIR / "ml_smell_predictions.csv" # Renamed for clarity
+
+unseen_file = (CI_WORKSPACE / "metrics" / "long_method_validation_dataset.csv") if CI_MODE else unseen_file
+output_file = (CI_WORKSPACE / "processed" / "ml_smell_predictions.csv") if CI_MODE else output_file
+
 
 necessary_features = ['scloc', 'lloc', 'effort', 'time', 'bugs', 'volume', 'difficulty', 'calculated_length']
 
