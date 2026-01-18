@@ -60,14 +60,14 @@ jinja2,src/jinja2/sandbox.py,__init__,410,412,3,3,0.0,LOW,100.0,HIGH,Safe Zone,N
 attrs,src/attr/exceptions.py,__init__,89,92,2,4,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/bccache.py,__init__,204,210,5,5,0.5,LOW,57.14,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/loaders.py,__init__,178,189,6,6,1.0,LOW,50.0,MEDIUM,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/lexer.py,__init__,477,594,14,19,1.25,LOW,14.41,LOW,Low Value,Increase coverage by adding input boundary tests; Add branch and conditional path tests due to high cyclomatic complexity
+jinja2,src/jinja2/lexer.py,__init__,477,594,14,19,1.25,HIGH,14.41,LOW,Hidden Risk,Write tests immediately before modifying this code; Increase coverage by adding input boundary tests; Add branch and conditional path tests due to high cyclomatic complexity
 jinja2,src/jinja2/lexer.py,__init__,323,335,2,9,0.0,LOW,61.54,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/lexer.py,__init__,300,301,2,2,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/lexer.py,__init__,257,261,2,3,0.0,LOW,60.0,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/idtracking.py,__init__,235,236,2,2,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/idtracking.py,__init__,175,176,3,2,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/environment.py,__init__,292,366,4,29,0.0,LOW,37.33,MEDIUM,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/loaders.py,__init__,271,328,9,37,2.8,LOW,55.17,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/environment.py,__init__,292,366,4,29,0.0,HIGH,37.33,MEDIUM,Refactor Candidate,Safe to refactor after ensuring existing tests capture current behavior
+jinja2,src/jinja2/loaders.py,__init__,271,328,9,37,2.8,HIGH,55.17,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/idtracking.py,__init__,31,44,4,15,1.5,LOW,71.43,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/environment.py,__init__,1561,1563,3,3,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/environment.py,__init__,1585,1587,4,3,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
@@ -88,7 +88,7 @@ jinja2,src/jinja2/compiler.py,__init__,255,257,2,5,0.0,LOW,100.0,HIGH,Safe Zone,
 jinja2,src/jinja2/runtime.py,__init__,401,421,2,7,0.0,LOW,28.57,LOW,Low Value,Increase coverage by adding input boundary tests
 jinja2,src/jinja2/runtime.py,__init__,342,352,3,5,0.0,LOW,45.45,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,__init__,277,279,3,4,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/compiler.py,__init__,301,372,4,38,0.5,LOW,40.28,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/compiler.py,__init__,301,372,4,38,0.5,HIGH,40.28,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/loaders.py,__init__,446,457,3,2,0.0,LOW,16.67,LOW,Low Value,Increase coverage by adding input boundary tests
 jinja2,src/jinja2/runtime.py,__init__,163,182,3,13,0.5,LOW,45.0,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/parser.py,__init__,51,72,5,16,0.0,LOW,59.09,MEDIUM,Safe Zone,No immediate testing action required
@@ -107,7 +107,7 @@ itsdangerous,src/itsdangerous/exc.py,__init__,15,17,2,3,0.0,LOW,100.0,HIGH,Safe 
 attrs,src/attr/_compat.py,__init__,36,40,4,5,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 itsdangerous,src/itsdangerous/signer.py,__init__,120,164,4,24,2.142857142857143,LOW,37.78,MEDIUM,Safe Zone,No immediate testing action required
 attrs,src/attr/_cmp.py,__init__,107,111,1,3,0.0,LOW,40.0,MEDIUM,Safe Zone,No immediate testing action required
-attrs,src/attr/_make.py,__init__,707,797,6,42,4.717391304347826,LOW,46.15,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+attrs,src/attr/_make.py,__init__,707,797,6,42,4.717391304347826,HIGH,46.15,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 itsdangerous,src/itsdangerous/signer.py,__init__,49,53,3,5,0.5,LOW,80.0,HIGH,Safe Zone,No immediate testing action required
 attrs,src/attr/_make.py,__init__,2842,2877,3,18,0.5,LOW,50.0,MEDIUM,Safe Zone,No immediate testing action required
 itsdangerous,src/itsdangerous/serializer.py,__init__,89,128,3,24,1.9090909090909087,LOW,42.5,MEDIUM,Safe Zone,No immediate testing action required
@@ -190,10 +190,10 @@ attrs,src/attr/_make.py,_add_eq,1937,1947,2,7,0.5,LOW,54.55,MEDIUM,Safe Zone,No 
 attrs,src/attr/_make.py,_add_hash,1814,1819,1,4,0.0,LOW,50.0,MEDIUM,Safe Zone,No immediate testing action required
 attrs,src/attr/_make.py,_add_method_dunders,1190,1206,6,9,0.0,LOW,47.06,MEDIUM,Safe Zone,No immediate testing action required
 attrs,src/attr/_make.py,_add_repr,2007,2015,2,6,0.5,LOW,55.56,MEDIUM,Safe Zone,No immediate testing action required
-attrs,src/attr/_funcs.py,_asdict_anything,124,194,9,20,1.2,LOW,23.94,LOW,Low Value,Increase coverage by adding input boundary tests
+attrs,src/attr/_funcs.py,_asdict_anything,124,194,9,20,1.2,HIGH,23.94,LOW,Hidden Risk,Write tests immediately before modifying this code; Increase coverage by adding input boundary tests
 attrs,src/attr/_make.py,_assign,2211,2219,2,5,0.0,LOW,44.44,MEDIUM,Safe Zone,No immediate testing action required
 attrs,src/attr/_make.py,_assign_with_converter,2222,2234,2,5,0.5,LOW,30.77,MEDIUM,Safe Zone,No immediate testing action required
-attrs,src/attr/_make.py,_attrs_to_init_script,2237,2524,46,133,5.274647887323944,LOW,40.97,MEDIUM,Safe Zone,Add branch and conditional path tests due to high cyclomatic complexity; Consider decomposing this method; add focused unit tests per responsibility
+attrs,src/attr/_make.py,_attrs_to_init_script,2237,2524,46,133,5.274647887323944,HIGH,40.97,MEDIUM,Refactor Candidate,Add branch and conditional path tests due to high cyclomatic complexity; Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/environment.py,_buffered_generator,1631,1648,4,19,2.5,LOW,72.22,HIGH,Safe Zone,No immediate testing action required
 jinja2,docs/examples/cache_extension.py,_cache_support,42,54,3,9,1.0,LOW,0.0,ZERO,Low Value,Add basic smoke tests to ensure execution paths are covered; Increase coverage by adding input boundary tests
 attrs,src/attr/_cmp.py,_check_same_type,146,150,1,3,1.0,LOW,40.0,MEDIUM,Safe Zone,No immediate testing action required
@@ -201,7 +201,7 @@ attrs,src/attr/_make.py,_collect_base_attrs,435,463,7,19,1.75,LOW,62.07,MEDIUM,S
 attrs,src/attr/_make.py,_collect_base_attrs_broken,466,491,4,13,1.0,LOW,46.15,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/environment.py,_compile,698,704,4,3,0.0,LOW,28.57,LOW,Low Value,Increase coverage by adding input boundary tests
 attrs,src/attr/_make.py,_compile_and_eval,313,318,1,4,0.0,LOW,50.0,MEDIUM,Safe Zone,No immediate testing action required
-attrs,src/attr/_make.py,_create_slots_class,867,1011,6,69,4.714285714285714,LOW,41.38,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+attrs,src/attr/_make.py,_create_slots_class,867,1011,6,69,4.714285714285714,HIGH,41.38,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/compiler.py,_default_finalize,1366,1371,4,3,0.0,LOW,33.33,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/nativetypes.py,_default_finalize,56,57,3,2,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 attrs,src/attr/_make.py,_default_init_alias_for,2527,2535,1,3,0.0,LOW,22.22,LOW,Low Value,Increase coverage by adding input boundary tests
@@ -219,7 +219,7 @@ jinja2,src/jinja2/parser.py,_fail_ut_eof,88,126,5,22,4.166666666666667,LOW,41.03
 jinja2,src/jinja2/runtime.py,_fail_with_undefined_error,935,942,2,6,0.0,LOW,75.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/runtime.py,_fail_with_undefined_error,846,852,2,3,0.0,LOW,28.57,LOW,Low Value,Increase coverage by adding input boundary tests
 jinja2,src/jinja2/nodes.py,_failing_new,1199,1200,1,2,0.0,LOW,50.0,MEDIUM,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/environment.py,_filter_test_common,493,545,4,33,2.0,LOW,30.19,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/environment.py,_filter_test_common,493,545,4,33,2.0,HIGH,30.19,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/compiler.py,_filter_test_common,1753,1792,4,21,2.333333333333333,LOW,47.5,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/environment.py,_from_namespace,1242,1267,3,15,0.0,LOW,53.85,MEDIUM,Safe Zone,No immediate testing action required
 attrs,src/attr/_version_info.py,_from_version_string,39,49,3,6,0.5,LOW,45.45,MEDIUM,Safe Zone,No immediate testing action required
@@ -255,7 +255,7 @@ attrs,src/attr/__init__.py,_make_getattr,75,131,1,32,4.166666666666667,HIGH,47.3
 attrs,src/attr/_make.py,_make_getstate_setstate,1031,1070,6,21,1.0,LOW,40.0,MEDIUM,Safe Zone,No immediate testing action required
 attrs,src/attr/_make.py,_make_hash,1743,1811,8,40,4.40625,HIGH,50.72,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 attrs,src/attr/_cmp.py,_make_init,102,113,1,6,0.0,LOW,33.33,MEDIUM,Safe Zone,No immediate testing action required
-attrs,src/attr/_make.py,_make_init,2113,2189,15,31,4.166666666666667,LOW,38.96,MEDIUM,Safe Zone,Add branch and conditional path tests due to high cyclomatic complexity; Consider decomposing this method; add focused unit tests per responsibility
+attrs,src/attr/_make.py,_make_init,2113,2189,15,31,4.166666666666667,HIGH,38.96,MEDIUM,Refactor Candidate,Add branch and conditional path tests due to high cyclomatic complexity; Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 itsdangerous,src/itsdangerous/signer.py,_make_keys_list,60,64,3,4,0.0,LOW,80.0,HIGH,Safe Zone,No immediate testing action required
 attrs,src/attr/_make.py,_make_method,321,347,3,14,1.875,LOW,44.44,MEDIUM,Safe Zone,No immediate testing action required
 attrs,src/attr/_make.py,_make_ne,1822,1838,1,9,1.5,LOW,41.18,MEDIUM,Safe Zone,No immediate testing action required
@@ -263,10 +263,10 @@ jinja2,src/jinja2/ext.py,_make_new_gettext,170,181,1,8,0.5,LOW,66.67,MEDIUM,Safe
 jinja2,src/jinja2/ext.py,_make_new_ngettext,184,200,1,9,0.5,LOW,47.06,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/ext.py,_make_new_npgettext,220,242,1,10,0.5,LOW,39.13,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/ext.py,_make_new_pgettext,203,217,1,9,0.5,LOW,53.33,MEDIUM,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/ext.py,_make_node,526,586,7,29,2.1818181818181817,LOW,37.7,MEDIUM,Safe Zone,No immediate testing action required
+jinja2,src/jinja2/ext.py,_make_node,526,586,7,29,2.1818181818181817,HIGH,37.7,MEDIUM,Refactor Candidate,Safe to refactor after ensuring existing tests capture current behavior
 attrs,src/attr/_cmp.py,_make_operator,116,136,1,12,1.0,LOW,52.38,MEDIUM,Safe Zone,No immediate testing action required
 attrs,src/attr/_make.py,_make_order,1881,1934,3,27,3.333333333333333,LOW,38.89,MEDIUM,Safe Zone,No immediate testing action required
-attrs,src/attr/_make.py,_make_repr,1950,2004,10,20,4.235294117647059,LOW,32.73,MEDIUM,Safe Zone,Add branch and conditional path tests due to high cyclomatic complexity
+attrs,src/attr/_make.py,_make_repr,1950,2004,10,20,4.235294117647059,HIGH,32.73,MEDIUM,Refactor Candidate,Add branch and conditional path tests due to high cyclomatic complexity; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/compiler.py,_make_unop,81,98,1,11,1.8,LOW,55.56,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/filters.py,_min_or_max,459,476,3,8,0.5,LOW,44.44,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/lexer.py,_normalize_newlines,596,600,14,3,0.0,LOW,40.0,MEDIUM,Safe Zone,Add branch and conditional path tests due to high cyclomatic complexity
@@ -279,7 +279,7 @@ jinja2,src/jinja2/nativetypes.py,_output_child_to_const,62,73,3,7,0.5,LOW,58.33,
 jinja2,src/jinja2/compiler.py,_output_const_repr,1423,1428,4,3,0.0,LOW,33.33,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/nativetypes.py,_output_const_repr,59,60,3,2,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/environment.py,_parse,613,617,4,3,0.0,LOW,40.0,MEDIUM,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/ext.py,_parse_block,479,524,7,31,0.7777777777777778,LOW,52.17,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/ext.py,_parse_block,479,524,7,31,0.7777777777777778,HIGH,52.17,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 attrs,src/attr/_make.py,_patch_original_class,831,865,6,16,2.0,LOW,42.86,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/runtime.py,_peek_next,480,490,2,6,0.5,LOW,45.45,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/utils.py,_postinit,434,440,2,6,0.0,LOW,85.71,HIGH,Safe Zone,No immediate testing action required
@@ -335,20 +335,20 @@ jinja2,src/jinja2/nodes.py,as_const,863,872,4,8,0.5,LOW,70.0,MEDIUM,Safe Zone,No
 jinja2,src/jinja2/nodes.py,as_const,521,534,5,9,1.0,LOW,64.29,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/nodes.py,as_const,497,510,5,9,1.0,LOW,64.29,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/nodes.py,as_const,1087,1089,2,3,0.0,LOW,33.33,MEDIUM,Safe Zone,No immediate testing action required
-attrs,src/attr/_funcs.py,asdict,11,121,14,30,2.4,LOW,24.32,LOW,Low Value,Increase coverage by adding input boundary tests; Add branch and conditional path tests due to high cyclomatic complexity; Consider decomposing this method; add focused unit tests per responsibility
+attrs,src/attr/_funcs.py,asdict,11,121,14,30,2.4,HIGH,24.32,LOW,Hidden Risk,Write tests immediately before modifying this code; Increase coverage by adding input boundary tests; Add branch and conditional path tests due to high cyclomatic complexity; Consider decomposing this method; add focused unit tests per responsibility
 attrs,src/attr/_next_gen.py,asdict,204,217,1,3,0.0,LOW,14.29,LOW,Low Value,Increase coverage by adding input boundary tests
 attrs,src/attr/_funcs.py,assoc,325,360,3,11,0.5,LOW,2.78,LOW,Low Value,Increase coverage by adding input boundary tests
 attrs,src/attr/_next_gen.py,astuple,220,229,1,3,0.0,LOW,20.0,LOW,Low Value,Increase coverage by adding input boundary tests
-attrs,src/attr/_funcs.py,astuple,197,298,18,29,2.5454545454545454,LOW,25.49,LOW,Low Value,Increase coverage by adding input boundary tests; Add branch and conditional path tests due to high cyclomatic complexity
+attrs,src/attr/_funcs.py,astuple,197,298,18,29,2.5454545454545454,HIGH,25.49,LOW,Hidden Risk,Write tests immediately before modifying this code; Increase coverage by adding input boundary tests; Add branch and conditional path tests due to high cyclomatic complexity
 jinja2,src/jinja2/async_utils.py,async_variant,12,53,1,27,0.6666666666666666,LOW,59.52,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/ext.py,attr,125,135,2,3,0.0,LOW,18.18,LOW,Low Value,Increase coverage by adding input boundary tests
 jinja2,src/jinja2/filters.py,attrgetter,105,119,3,10,1.0,LOW,66.67,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/filters.py,attrgetter,68,78,1,8,1.2,LOW,72.73,HIGH,Safe Zone,No immediate testing action required
-attrs,src/attr/_make.py,attrib,98,310,13,23,2.5,LOW,10.33,LOW,Low Value,Increase coverage by adding input boundary tests; Add branch and conditional path tests due to high cyclomatic complexity
-attrs,src/attr/_make.py,attrs,1306,1715,4,55,4.047619047619048,LOW,12.2,LOW,Low Value,Increase coverage by adding input boundary tests; Consider decomposing this method; add focused unit tests per responsibility
+attrs,src/attr/_make.py,attrib,98,310,13,23,2.5,HIGH,10.33,LOW,Hidden Risk,Write tests immediately before modifying this code; Increase coverage by adding input boundary tests; Add branch and conditional path tests due to high cyclomatic complexity
+attrs,src/attr/_make.py,attrs,1306,1715,4,55,4.047619047619048,HIGH,12.2,LOW,Hidden Risk,Write tests immediately before modifying this code; Increase coverage by adding input boundary tests; Consider decomposing this method; add focused unit tests per responsibility
 attrs,src/attr/_make.py,attrs_to_tuple,1887,1896,3,3,0.0,LOW,20.0,LOW,Low Value,Increase coverage by adding input boundary tests
 jinja2,src/jinja2/utils.py,autoescape,613,621,3,9,0.5,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/ext.py,babel_extract,773,862,11,30,2.0,LOW,24.44,LOW,Low Value,Increase coverage by adding input boundary tests; Add branch and conditional path tests due to high cyclomatic complexity; Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/ext.py,babel_extract,773,862,11,30,2.0,HIGH,24.44,LOW,Hidden Risk,Write tests immediately before modifying this code; Increase coverage by adding input boundary tests; Add branch and conditional path tests due to high cyclomatic complexity; Consider decomposing this method; add focused unit tests per responsibility
 itsdangerous,src/itsdangerous/encoding.py,base64_decode,28,38,2,8,2.0,LOW,63.64,MEDIUM,Safe Zone,No immediate testing action required
 itsdangerous,src/itsdangerous/encoding.py,base64_encode,20,25,1,4,0.0,LOW,50.0,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/ext.py,bind,91,96,2,6,0.0,LOW,83.33,HIGH,Safe Zone,No immediate testing action required
@@ -387,7 +387,7 @@ jinja2,src/jinja2/environment.py,compile,729,768,4,15,0.5,LOW,35.0,MEDIUM,Safe Z
 jinja2,src/jinja2/environment.py,compile,718,726,4,2,0.0,LOW,11.11,LOW,Low Value,Increase coverage by adding input boundary tests
 jinja2,src/jinja2/environment.py,compile_expression,770,813,4,13,0.5,LOW,20.45,LOW,Low Value,Increase coverage by adding input boundary tests
 jinja2,src/jinja2/lexer.py,compile_rules,211,249,4,10,1.1428571428571428,LOW,20.51,LOW,Low Value,Increase coverage by adding input boundary tests
-jinja2,src/jinja2/environment.py,compile_templates,815,891,4,41,3.0,LOW,45.45,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/environment.py,compile_templates,815,891,4,41,3.0,HIGH,45.45,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/nodes.py,const,888,891,2,4,0.5,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/utils.py,consume,112,115,2,4,0.0,LOW,75.0,HIGH,Safe Zone,No immediate testing action required
 attrs,src/attr/setters.py,convert,57,68,2,6,0.0,LOW,41.67,MEDIUM,Safe Zone,No immediate testing action required
@@ -409,7 +409,7 @@ attrs,src/attr/_make.py,default,2893,2908,3,6,0.5,LOW,31.25,MEDIUM,Safe Zone,No 
 attrs,src/attr/converters.py,default_if_none,54,102,8,24,2.7,LOW,44.9,MEDIUM,Safe Zone,No immediate testing action required
 attrs,src/attr/converters.py,default_if_none_converter,96,100,8,4,0.5,LOW,80.0,HIGH,Safe Zone,No immediate testing action required
 attrs,src/attr/converters.py,default_if_none_converter,88,92,8,4,0.5,LOW,80.0,HIGH,Safe Zone,No immediate testing action required
-attrs,src/attr/_next_gen.py,define,24,153,2,26,2.333333333333333,LOW,17.69,LOW,Low Value,Increase coverage by adding input boundary tests
+attrs,src/attr/_next_gen.py,define,24,153,2,26,2.333333333333333,HIGH,17.69,LOW,Hidden Risk,Write tests immediately before modifying this code; Increase coverage by adding input boundary tests
 jinja2,src/jinja2/runtime.py,depth,450,452,2,3,0.5,LOW,66.67,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,derive_context,768,769,4,2,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 itsdangerous,src/itsdangerous/signer.py,derive_key,173,204,4,18,3.090909090909091,LOW,46.88,MEDIUM,Safe Zone,No immediate testing action required
@@ -491,12 +491,12 @@ jinja2,src/jinja2/compiler.py,fail,380,382,4,3,0.0,LOW,66.67,MEDIUM,Safe Zone,No
 jinja2,src/jinja2/parser.py,fail,74,86,5,5,0.5,LOW,30.77,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/parser.py,fail_eof,137,146,5,6,0.5,LOW,50.0,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/parser.py,fail_unknown_tag,128,135,5,3,0.0,LOW,25.0,LOW,Low Value,Increase coverage by adding input boundary tests
-jinja2,src/jinja2/debug.py,fake_traceback,76,147,7,26,3.5,LOW,26.39,LOW,Low Value,Increase coverage by adding input boundary tests
+jinja2,src/jinja2/debug.py,fake_traceback,76,147,7,26,3.5,HIGH,26.39,LOW,Hidden Risk,Write tests immediately before modifying this code; Increase coverage by adding input boundary tests
 attrs,src/attr/_next_gen.py,field,160,201,1,3,0.0,LOW,4.76,LOW,Low Value,Increase coverage by adding input boundary tests
 attrs,src/attr/_make.py,fields,2018,2057,6,16,3.6666666666666665,LOW,37.5,MEDIUM,Safe Zone,No immediate testing action required
 attrs,src/attr/_make.py,fields_dict,2060,2082,4,11,1.0,LOW,39.13,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/environment.py,filter_func,922,923,4,2,1.0,LOW,0.0,ZERO,Low Value,Add basic smoke tests to ensure execution paths are covered; Increase coverage by adding input boundary tests
-jinja2,docs/examples/inline_gettext_extension.py,filter_stream,22,72,16,44,6.157894736842105,LOW,0.0,ZERO,Low Value,Add basic smoke tests to ensure execution paths are covered; Increase coverage by adding input boundary tests; Add branch and conditional path tests due to high cyclomatic complexity; Consider decomposing this method; add focused unit tests per responsibility
+jinja2,docs/examples/inline_gettext_extension.py,filter_stream,22,72,16,44,6.157894736842105,HIGH,0.0,ZERO,Hidden Risk,Write tests immediately before modifying this code; Add basic smoke tests to ensure execution paths are covered; Increase coverage by adding input boundary tests; Add branch and conditional path tests due to high cyclomatic complexity; Consider decomposing this method; add focused unit tests per responsibility
 jinja2,src/jinja2/ext.py,filter_stream,107,115,2,3,0.0,LOW,22.22,LOW,Low Value,Increase coverage by adding input boundary tests
 jinja2,src/jinja2/compiler.py,finalize,1417,1418,4,2,0.0,LOW,50.0,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,finalize,1409,1410,4,2,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
@@ -655,7 +655,7 @@ itsdangerous,src/itsdangerous/serializer.py,loads_unsafe,242,258,3,3,0.0,LOW,11.
 jinja2,src/jinja2/environment.py,log_function,845,846,4,2,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/lexer.py,look,352,358,2,7,0.0,LOW,85.71,HIGH,Safe Zone,No immediate testing action required
 attrs,src/attr/validators.py,lt,468,477,1,3,0.0,LOW,20.0,LOW,Low Value,Increase coverage by adding input boundary tests
-jinja2,src/jinja2/compiler.py,macro_body,611,692,4,56,4.5,LOW,63.41,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/compiler.py,macro_body,611,692,4,56,4.5,HIGH,63.41,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/compiler.py,macro_def,694,704,4,7,1.0,LOW,54.55,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,scripts/generate_identifier_pattern.py,main,56,70,1,10,0.0,LOW,0.0,ZERO,Low Value,Add basic smoke tests to ensure execution paths are covered; Increase coverage by adding input boundary tests
 jinja2,src/jinja2/filters.py,make_attrgetter,55,80,1,12,1.2,LOW,42.31,MEDIUM,Safe Zone,No immediate testing action required
@@ -705,7 +705,7 @@ jinja2,docs/examples/cache_extension.py,parse,15,40,3,9,0.0,LOW,0.0,ZERO,Low Val
 jinja2,src/jinja2/parser.py,parse,712,713,5,2,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/ext.py,parse,117,123,2,3,0.0,LOW,14.29,LOW,Low Value,Increase coverage by adding input boundary tests
 jinja2,src/jinja2/environment.py,parse,594,611,4,6,0.0,LOW,16.67,LOW,Low Value,Increase coverage by adding input boundary tests
-jinja2,src/jinja2/ext.py,parse,354,474,7,83,9.11111111111111,LOW,59.5,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/ext.py,parse,354,474,7,83,9.11111111111111,HIGH,59.5,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/ext.py,parse,637,641,2,5,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/ext.py,parse,607,611,3,5,0.5,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/ext.py,parse,596,599,2,4,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
@@ -716,7 +716,7 @@ jinja2,src/jinja2/parser.py,parse_assign_target,458,461,5,2,0.0,LOW,25.0,LOW,Low
 jinja2,src/jinja2/parser.py,parse_autoescape,288,292,5,5,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/parser.py,parse_block,294,324,5,14,2.0,LOW,45.16,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/parser.py,parse_call,913,918,5,4,0.0,LOW,66.67,MEDIUM,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/parser.py,parse_call_args,864,911,5,36,4.583333333333333,LOW,68.75,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/parser.py,parse_call_args,864,911,5,36,4.583333333333333,HIGH,68.75,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/parser.py,parse_call_block,420,433,5,13,1.0,LOW,78.57,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/parser.py,parse_compare,563,584,5,20,1.5,LOW,77.27,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/parser.py,parse_concat,597,605,5,9,0.5,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
@@ -729,7 +729,7 @@ jinja2,src/jinja2/parser.py,parse_filter,920,941,5,18,2.6,LOW,68.18,MEDIUM,Safe 
 jinja2,src/jinja2/parser.py,parse_filter_block,435,439,5,5,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/parser.py,parse_filter_expr,786,799,5,12,1.25,LOW,64.29,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/parser.py,parse_for,234,251,5,16,0.5,LOW,77.78,HIGH,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/parser.py,parse_from,362,402,5,32,3.5454545454545454,LOW,68.29,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/parser.py,parse_from,362,402,5,32,3.5454545454545454,HIGH,68.29,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/parser.py,parse_if,253,269,5,17,0.0,LOW,88.24,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/parser.py,parse_import,355,360,5,6,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/parser.py,parse_import_context,331,341,5,7,1.0,LOW,54.55,MEDIUM,Safe Zone,No immediate testing action required
@@ -748,9 +748,9 @@ jinja2,src/jinja2/parser.py,parse_set,223,232,5,10,0.0,LOW,90.0,HIGH,Safe Zone,N
 jinja2,src/jinja2/parser.py,parse_signature,404,418,5,15,0.5,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/parser.py,parse_statement,165,192,5,24,2.5,LOW,75.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/parser.py,parse_statements,194,221,5,10,0.5,LOW,32.14,MEDIUM,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/parser.py,parse_subscribed,832,862,5,28,4.5,LOW,67.74,MEDIUM,Safe Zone,No immediate testing action required
+jinja2,src/jinja2/parser.py,parse_subscribed,832,862,5,28,4.5,HIGH,67.74,MEDIUM,Refactor Candidate,Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/parser.py,parse_subscript,801,830,5,27,1.5,LOW,70.0,MEDIUM,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/parser.py,parse_test,943,979,5,27,2.9545454545454546,LOW,62.16,MEDIUM,Safe Zone,No immediate testing action required
+jinja2,src/jinja2/parser.py,parse_test,943,979,5,27,2.9545454545454546,HIGH,62.16,MEDIUM,Refactor Candidate,Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/parser.py,parse_tuple,680,744,5,30,1.0,LOW,36.92,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
 jinja2,src/jinja2/parser.py,parse_unary,628,644,5,17,0.6666666666666666,LOW,82.35,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/parser.py,parse_with,271,286,5,18,0.5,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
@@ -792,7 +792,7 @@ jinja2,src/jinja2/compiler.py,return_buffer_contents,394,412,4,17,0.5,LOW,26.32,
 jinja2,src/jinja2/nodes.py,revert,87,89,2,3,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/runtime.py,revindex,468,473,2,3,0.5,LOW,33.33,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/runtime.py,revindex0,460,465,2,3,0.5,LOW,33.33,MEDIUM,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/debug.py,rewrite_traceback_stack,14,73,8,30,2.75,LOW,45.0,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/debug.py,rewrite_traceback_stack,14,73,8,30,2.75,HIGH,45.0,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/sandbox.py,safe_range,97,109,2,6,0.5,LOW,30.77,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/nodes.py,save,84,85,2,2,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 itsdangerous,src/itsdangerous/signer.py,secret_key,167,171,4,3,0.5,LOW,20.0,LOW,Low Value,Increase coverage by adding input boundary tests
@@ -810,7 +810,7 @@ attrs,src/attr/_config.py,set_run_validators,8,20,2,7,0.5,LOW,38.46,MEDIUM,Safe 
 jinja2,src/jinja2/utils.py,setdefault,470,478,2,7,0.0,LOW,66.67,MEDIUM,Safe Zone,No immediate testing action required
 itsdangerous,src/itsdangerous/timed.py,sign,49,55,4,7,0.6666666666666666,LOW,85.71,HIGH,Safe Zone,No immediate testing action required
 itsdangerous,src/itsdangerous/signer.py,sign,213,216,4,4,0.5,LOW,75.0,HIGH,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/compiler.py,signature,481,536,4,37,3.9,LOW,33.93,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/compiler.py,signature,481,536,4,37,3.9,HIGH,33.93,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/compiler.py,simple_write,434,440,4,5,0.0,LOW,57.14,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/lexer.py,skip,360,363,2,4,0.0,LOW,75.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/lexer.py,skip_if,374,376,2,3,0.5,LOW,66.67,MEDIUM,Safe Zone,No immediate testing action required
@@ -823,7 +823,7 @@ jinja2,src/jinja2/compiler.py,start_write,422,427,4,6,0.5,LOW,66.67,MEDIUM,Safe 
 jinja2,src/jinja2/idtracking.py,store,94,110,4,9,1.2,LOW,52.94,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/runtime.py,str_join,86,88,1,3,0.0,LOW,66.67,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/environment.py,stream,1326,1330,3,3,0.0,LOW,40.0,MEDIUM,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/parser.py,subparse,981,1028,5,44,2.625,LOW,75.0,HIGH,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/parser.py,subparse,981,1028,5,44,2.625,HIGH,75.0,HIGH,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/runtime.py,super,184,196,3,9,0.5,LOW,46.15,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/runtime.py,super,355,361,3,5,1.5,LOW,14.29,LOW,Low Value,Increase coverage by adding input boundary tests
 jinja2,src/jinja2/idtracking.py,symbols_for_node,22,27,1,4,0.0,LOW,66.67,MEDIUM,Safe Zone,No immediate testing action required
@@ -838,7 +838,7 @@ jinja2,src/jinja2/filters.py,sync_do_reject,1563,1585,1,4,0.5,LOW,8.7,LOW,Low Va
 jinja2,src/jinja2/filters.py,sync_do_rejectattr,1639,1663,1,4,0.5,LOW,8.0,LOW,Low Value,Increase coverage by adding input boundary tests
 jinja2,src/jinja2/filters.py,sync_do_select,1522,1549,1,4,0.0,LOW,7.14,LOW,Low Value,Increase coverage by adding input boundary tests
 jinja2,src/jinja2/filters.py,sync_do_selectattr,1599,1625,1,4,0.0,LOW,7.41,LOW,Low Value,Increase coverage by adding input boundary tests
-jinja2,src/jinja2/filters.py,sync_do_slice,1032,1072,5,17,6.857142857142857,LOW,36.59,MEDIUM,Safe Zone,No immediate testing action required
+jinja2,src/jinja2/filters.py,sync_do_slice,1032,1072,5,17,6.857142857142857,HIGH,36.59,MEDIUM,Refactor Candidate,Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/filters.py,sync_do_sum,1286,1309,2,5,0.5,LOW,16.67,LOW,Low Value,Increase coverage by adding input boundary tests
 jinja2,src/jinja2/compiler.py,temporary_identifier,384,387,4,4,0.5,LOW,75.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/lexer.py,test,275,288,3,7,1.2,LOW,42.86,MEDIUM,Safe Zone,No immediate testing action required
@@ -868,7 +868,7 @@ jinja2,src/jinja2/tests.py,test_undefined,46,48,1,3,0.0,LOW,66.67,MEDIUM,Safe Zo
 jinja2,src/jinja2/tests.py,test_upper,143,145,1,3,0.0,LOW,66.67,MEDIUM,Safe Zone,No immediate testing action required
 itsdangerous,src/itsdangerous/timed.py,timestamp_to_datetime,39,47,4,3,0.0,LOW,22.22,LOW,Low Value,Increase coverage by adding input boundary tests
 attrs,src/attr/converters.py,to_bool,105,144,5,15,0.6666666666666666,LOW,35.0,MEDIUM,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/lexer.py,tokeniter,667,866,14,104,10.02542372881356,LOW,40.5,MEDIUM,Safe Zone,Add branch and conditional path tests due to high cyclomatic complexity; Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/lexer.py,tokeniter,667,866,14,104,10.02542372881356,HIGH,40.5,MEDIUM,Refactor Candidate,Add branch and conditional path tests due to high cyclomatic complexity; Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/lexer.py,tokenize,602,611,14,4,0.0,LOW,30.0,LOW,Low Value,Increase coverage by adding input boundary tests; Add branch and conditional path tests due to high cyclomatic complexity
 jinja2,src/jinja2/filters.py,transfunc,1751,1752,4,2,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/utils.py,trim_url,269,270,24,2,0.0,LOW,100.0,HIGH,Safe Zone,Add branch and conditional path tests due to high cyclomatic complexity
@@ -923,10 +923,10 @@ jinja2,src/jinja2/compiler.py,visit_Filter,1795,1809,4,10,0.5,LOW,53.33,MEDIUM,S
 jinja2,src/jinja2/compiler.py,visit_Filter,259,261,2,3,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,visit_FilterBlock,1334,1343,4,10,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/idtracking.py,visit_FilterBlock,300,301,2,2,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/compiler.py,visit_For,1156,1293,4,96,3.7058823529411766,LOW,67.39,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/compiler.py,visit_For,1156,1293,4,96,3.7058823529411766,HIGH,67.39,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/idtracking.py,visit_For,202,220,3,16,1.6,LOW,73.68,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/idtracking.py,visit_For,291,295,2,3,0.0,LOW,40.0,MEDIUM,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/compiler.py,visit_FromImport,1106,1154,4,35,1.25,LOW,61.22,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/compiler.py,visit_FromImport,1106,1154,4,35,1.25,HIGH,61.22,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/idtracking.py,visit_FromImport,277,284,2,7,0.0,LOW,62.5,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,visit_Getattr,1710,1719,4,8,0.0,LOW,80.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,visit_Getitem,1722,1740,4,16,0.0,LOW,78.95,HIGH,Safe Zone,No immediate testing action required
@@ -935,7 +935,7 @@ jinja2,src/jinja2/idtracking.py,visit_If,252,268,2,13,0.5,LOW,76.47,HIGH,Safe Zo
 jinja2,src/jinja2/idtracking.py,visit_Import,273,275,2,3,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,visit_Import,1095,1104,4,8,1.0,LOW,70.0,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,visit_ImportedName,1890,1891,4,2,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/compiler.py,visit_Include,1029,1078,4,38,0.5,LOW,68.0,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/compiler.py,visit_Include,1029,1078,4,38,0.5,HIGH,68.0,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/compiler.py,visit_InternalName,1893,1894,4,2,0.0,LOW,50.0,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,visit_Keyword,1862,1864,4,3,0.5,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,visit_List,1652,1658,4,7,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
@@ -949,7 +949,7 @@ jinja2,src/jinja2/compiler.py,visit_Name,281,287,3,7,1.7142857142857142,LOW,85.7
 jinja2,src/jinja2/compiler.py,visit_Name,1589,1612,4,11,3.3529411764705883,LOW,45.83,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/idtracking.py,visit_Name,238,247,2,8,1.3333333333333333,LOW,70.0,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,visit_Operand,1705,1707,4,3,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/compiler.py,visit_Output,1478,1555,4,49,7.6923076923076925,LOW,55.13,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/compiler.py,visit_Output,1478,1555,4,49,7.6923076923076925,HIGH,55.13,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/idtracking.py,visit_OverlayScope,317,318,2,2,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,visit_OverlayScope,1919,1931,4,12,0.0,LOW,92.31,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/idtracking.py,visit_OverlayScope,198,200,3,3,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
@@ -957,7 +957,7 @@ jinja2,src/jinja2/idtracking.py,visit_Scope,311,312,2,2,0.0,LOW,100.0,HIGH,Safe 
 jinja2,src/jinja2/compiler.py,visit_Scope,1912,1917,4,6,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,visit_ScopedEvalContextModifier,1946,1956,4,9,0.0,LOW,81.82,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,visit_Slice,1742,1750,4,9,0.75,LOW,77.78,HIGH,Safe Zone,No immediate testing action required
-jinja2,src/jinja2/compiler.py,visit_Template,826,942,4,80,4.375,LOW,62.39,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+jinja2,src/jinja2/compiler.py,visit_Template,826,942,4,80,4.375,HIGH,62.39,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 jinja2,src/jinja2/compiler.py,visit_TemplateData,1635,1641,4,5,0.0,LOW,71.43,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,visit_Test,1812,1814,4,3,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,visit_Test,263,265,2,3,0.0,LOW,100.0,HIGH,Safe Zone,No immediate testing action required
@@ -969,7 +969,7 @@ jinja2,src/jinja2/visitor.py,visit_list,83,92,7,6,0.5,LOW,10.0,LOW,Low Value,Inc
 jinja2,src/jinja2/compiler.py,visitor,85,96,1,8,1.8,LOW,58.33,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/compiler.py,visitor,61,76,1,12,1.0,LOW,68.75,MEDIUM,Safe Zone,No immediate testing action required
 itsdangerous,src/itsdangerous/encoding.py,want_bytes,11,17,2,4,0.0,LOW,57.14,MEDIUM,Safe Zone,No immediate testing action required
-attrs,src/attr/_make.py,wrap,1608,1708,4,45,4.102564102564102,LOW,40.59,MEDIUM,Safe Zone,Consider decomposing this method; add focused unit tests per responsibility
+attrs,src/attr/_make.py,wrap,1608,1708,4,45,4.102564102564102,HIGH,40.59,MEDIUM,Refactor Candidate,Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 attrs,src/attr/_next_gen.py,wrap,115,146,2,19,2.4,LOW,53.12,MEDIUM,Safe Zone,No immediate testing action required
 jinja2,src/jinja2/lexer.py,wrap,613,665,14,35,3.571428571428572,HIGH,52.83,MEDIUM,Refactor Candidate,Add branch and conditional path tests due to high cyclomatic complexity; Consider decomposing this method; add focused unit tests per responsibility; Safe to refactor after ensuring existing tests capture current behavior
 attrs,src/attr/setters.py,wrapped_pipe,19,25,1,5,0.0,LOW,71.43,HIGH,Safe Zone,No immediate testing action required
