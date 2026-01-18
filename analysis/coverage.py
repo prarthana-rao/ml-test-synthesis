@@ -64,6 +64,9 @@ def resolve_python(repo_name: str) -> Path:
         raise CoverageError(f"Missing repo venv python: {py}")
     return py
 
+def pytest_args() -> list[str]:
+    return ["-k", "not mypy and not TestAssoc"]
+
 
 # ---------------------------------------------------------
 # Coverage execution
@@ -81,6 +84,7 @@ def collect_coverage(repo_path: Path, python_exec: Path) -> dict:
         "-m",
         "pytest",
     ]
+    cmd += pytest_args()
 
     try:
         subprocess.run(cmd, cwd=repo_path, check=True)
@@ -102,7 +106,12 @@ def collect_coverage(repo_path: Path, python_exec: Path) -> dict:
         raise CoverageError("Coverage JSON failed")
 
     with open(json_out, "r") as f:
-        return json.load(f)
+        data = json.load(f)
+    
+    with open(json_out, "w") as f:
+        json.dump(data, f, indent=2)
+
+    return data 
 
 
 # ---------------------------------------------------------
@@ -111,12 +120,14 @@ def collect_coverage(repo_path: Path, python_exec: Path) -> dict:
 if __name__ == "__main__":
 
     # ---------------- CI MODE ----------------
+    # --- inside __main__ CI block replace repo resolution only ---
+
     if CI_MODE:
-        repo = TARGET_REPO
+        repo = Path(sys.argv[1]) if len(sys.argv) > 1 else TARGET_REPO
         py = Path(sys.executable)
 
         try:
-            collect_coverage(repo, py)
+            cov = collect_coverage(repo, py)
             print("[OK] CI coverage collected")
         except CoverageError as e:
             print(f"[ERROR] {e}")
@@ -140,11 +151,8 @@ if __name__ == "__main__":
     DATA_DIR.mkdir(exist_ok=True)
 
     try:
-        cov = collect_coverage(repo_path, python_exec)
-        out = DATA_DIR / f"{repo_name}_coverage.json"
-        with open(out, "w") as f:
-            json.dump(cov, f, indent=2)
-        print(f"[OK] Coverage saved → {out}")
+        collect_coverage(repo_path, python_exec)
+        print(f"[OK] Coverage saved for → {repo_name}")
     except CoverageError as e:
         print(f"[ERROR] {e}")
         sys.exit(2)

@@ -6,9 +6,6 @@ from ci.runner import run_analysis, CIError
 
 
 def ensure_tool_available(tool: str):
-    """
-    Ensure required CLI tools exist in PATH.
-    """
     if shutil.which(tool) is None:
         raise CIError(
             f"Required tool not found in PATH: {tool}. "
@@ -18,37 +15,35 @@ def ensure_tool_available(tool: str):
 
 def main():
     """
-    CI entrypoint for running analysis inside an existing repository.
+    CI entrypoint.
 
-    Assumptions:
-    - This script is executed INSIDE the target repo
-    - pytest works
-    - coverage works
-    - dependencies are already installed
+    Usage:
+        python -m ci.in_repo [repo_path]
+
+    - If repo_path is provided → analyze that repo
+    - Otherwise → analyze current working directory
     """
 
-    repo_root = Path.cwd().resolve()
+    if len(sys.argv) > 2:
+        print("Usage: python -m ci.in_repo [repo_path]")
+        sys.exit(1)
+
+    repo_root = (
+        Path(sys.argv[1]).resolve()
+        if len(sys.argv) == 2
+        else Path.cwd().resolve()
+    )
 
     print(f"📁 Running CI analysis in repo: {repo_root}")
 
-    # -------------------------------------------------
-    # Basic sanity checks
-    # -------------------------------------------------
     ensure_tool_available("pytest")
     ensure_tool_available("coverage")
 
-    # Optional but useful signal
     if not (repo_root / "pyproject.toml").exists() and not (
         repo_root / "setup.py"
     ).exists():
-        print(
-            "⚠️  Warning: No pyproject.toml or setup.py found. "
-            "Proceeding anyway."
-        )
+        print("⚠️  Warning: No pyproject.toml or setup.py found. Proceeding anyway.")
 
-    # -------------------------------------------------
-    # Run the full CI pipeline
-    # -------------------------------------------------
     try:
         run_analysis(repo_root)
     except CIError as e:
